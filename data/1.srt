@@ -1,0 +1,216 @@
+1
+00:00:00,030 --> 00:00:04,380
+hello and welcome it's Chris here and
+
+2
+00:00:01,890 --> 00:00:07,200
+I'm so excited and humbled to be here
+
+3
+00:00:04,380 --> 00:00:10,170
+with you 11 years ago I was exactly
+
+4
+00:00:07,200 --> 00:00:12,630
+where you are now starting to learn iOS
+
+5
+00:00:10,170 --> 00:00:14,070
+programming and how to build apps don't
+
+6
+00:00:12,630 --> 00:00:16,170
+worry it's not going to take you
+
+7
+00:00:14,070 --> 00:00:18,060
+anywhere close to that amount of time to
+
+8
+00:00:16,170 --> 00:00:20,670
+get skilled at this because you have
+
+9
+00:00:18,060 --> 00:00:22,830
+these videos showing you exactly what to
+
+10
+00:00:20,670 --> 00:00:25,590
+learn and what order to learn them in
+
+11
+00:00:22,830 --> 00:00:27,630
+and plus you have me here to help you
+
+12
+00:00:25,590 --> 00:00:29,730
+clear any roadblocks that are in your
+
+13
+00:00:27,630 --> 00:00:31,800
+way in this course you're going to learn
+
+14
+00:00:29,730 --> 00:00:33,809
+the foundational skills needed to build
+
+15
+00:00:31,800 --> 00:00:35,520
+any sort of app you're going to learn
+
+16
+00:00:33,809 --> 00:00:37,530
+how to use Xcode to build user
+
+17
+00:00:35,520 --> 00:00:39,180
+interfaces you're going to learn and
+
+18
+00:00:37,530 --> 00:00:41,160
+practice the ins and outs of writing
+
+19
+00:00:39,180 --> 00:00:42,780
+Swift code so that when it comes time to
+
+20
+00:00:41,160 --> 00:00:45,420
+write your own app you won't even bat an
+
+21
+00:00:42,780 --> 00:00:47,640
+eye these are the two foundational
+
+22
+00:00:45,420 --> 00:00:50,129
+skills that every great iOS developer
+
+23
+00:00:47,640 --> 00:00:53,010
+has mastered after you get a solid
+
+24
+00:00:50,129 --> 00:00:54,930
+foundation with Swift and Xcode which
+
+25
+00:00:53,010 --> 00:00:56,879
+you most definitely will after going
+
+26
+00:00:54,930 --> 00:00:59,520
+through this course then you can explore
+
+27
+00:00:56,879 --> 00:01:01,800
+the other features of iOS now with that
+
+28
+00:00:59,520 --> 00:01:03,870
+said let me give you three tips on how
+
+29
+00:01:01,800 --> 00:01:06,990
+to go through this course effectively
+
+30
+00:01:03,870 --> 00:01:09,090
+number one temporarily put aside your
+
+31
+00:01:06,990 --> 00:01:10,830
+dream app I'm going to take you through
+
+32
+00:01:09,090 --> 00:01:12,869
+building four different apps in this
+
+33
+00:01:10,830 --> 00:01:14,640
+course and even though they might not
+
+34
+00:01:12,869 --> 00:01:16,920
+seem like they have anything to do with
+
+35
+00:01:14,640 --> 00:01:18,630
+what you want to build I assure you the
+
+36
+00:01:16,920 --> 00:01:20,790
+skills that you're going to acquire from
+
+37
+00:01:18,630 --> 00:01:24,000
+building these four apps they're going
+
+38
+00:01:20,790 --> 00:01:26,670
+to be crucial to build anything number
+
+39
+00:01:24,000 --> 00:01:29,490
+two this goes without saying but build
+
+40
+00:01:26,670 --> 00:01:31,860
+each lesson on your own computer this
+
+41
+00:01:29,490 --> 00:01:34,020
+hands-on work will be the heavy lifting
+
+42
+00:01:31,860 --> 00:01:36,750
+that will accelerate and transform your
+
+43
+00:01:34,020 --> 00:01:39,990
+knowledge into actual real-world skills
+
+44
+00:01:36,750 --> 00:01:42,780
+and number three expect frustration
+
+45
+00:01:39,990 --> 00:01:44,520
+learning anything new is hard but that's
+
+46
+00:01:42,780 --> 00:01:46,799
+why you're here this course has gone
+
+47
+00:01:44,520 --> 00:01:48,780
+through numerous iterations and updates
+
+48
+00:01:46,799 --> 00:01:51,149
+and revisions in the last five years and
+
+49
+00:01:48,780 --> 00:01:52,950
+this one is the best version yet that's
+
+50
+00:01:51,149 --> 00:01:55,439
+why I believe you're in the unique
+
+51
+00:01:52,950 --> 00:01:58,439
+position to succeed so with that said
+
+52
+00:01:55,439 --> 00:02:00,810
+welcome again I'm so excited to be here
+
+53
+00:01:58,439 --> 00:02:03,140
+with you and I can't wait to see what
+
+54
+00:02:00,810 --> 00:02:03,140
+you build
+
