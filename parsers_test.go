@@ -9,30 +9,6 @@ import (
 	"github.com/leotse/srtfix"
 )
 
-const OneLiner = `
-1
-00:00:00,030 --> 00:00:04,380
-hello world
-`
-
-const MultiLiner = `
-
-
-1
-00:00:00,030 --> 00:00:04,380
-hello 111
-
-2
-00:00:01,890 --> 00:00:07,200
-hello 222
-
-3
-00:00:04,380 --> 00:00:10,170
-hello 333
-
-
-`
-
 var _ = Describe("Parser", func() {
 	Describe("ParseSrtFile()", func() {
 		It("returns SrtFormatErr for invalid srt", func() {
@@ -114,3 +90,31 @@ var _ = Describe("Parser", func() {
 		})
 	})
 })
+
+///////////////
+// Test Data //
+///////////////
+
+const OneLiner = `
+1
+00:00:00,030 --> 00:00:04,380
+hello world
+`
+
+const MultiLiner = `
+
+
+1
+00:00:00,030 --> 00:00:04,380
+hello 111
+
+2
+00:00:01,890 --> 00:00:07,200
+hello 222
+
+3
+00:00:04,380 --> 00:00:10,170
+hello 333
+
+
+`
