@@ -1,4 +1,4 @@
-package srtconv
+package srtfix
 
 // SrtFormatErr is returned by the srt parser when srt is invalid
 const SrtFormatErr = "invalid srt format"

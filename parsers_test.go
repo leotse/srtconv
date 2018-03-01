@@ -1,4 +1,4 @@
-package srtconv_test
+package srtfix_test
 
 import (
 	"time"
@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"github.com/leotse/srtconv"
+	"github.com/leotse/srtfix"
 )
 
 const OneLiner = `
@@ -36,32 +36,32 @@ hello 333
 var _ = Describe("Parser", func() {
 	Describe("ParseSrtFile()", func() {
 		It("returns SrtFormatErr for invalid srt", func() {
-			_, err := srtconv.ParseSrtFile("i am an invalid srt")
+			_, err := srtfix.ParseSrtFile("i am an invalid srt")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.SrtFormatErr))
+			Ω(err).Should(MatchError(srtfix.SrtFormatErr))
 		})
 		It("returns empty captions for empty srt", func() {
-			captions, err := srtconv.ParseSrtFile("")
+			captions, err := srtfix.ParseSrtFile("")
 			Ω(err).ShouldNot(HaveOccurred())
 			Ω(captions).Should(HaveLen(0))
 		})
 		It("returns parsed captions", func() {
-			captions, err := srtconv.ParseSrtFile(MultiLiner)
+			captions, err := srtfix.ParseSrtFile(MultiLiner)
 			Ω(err).ShouldNot(HaveOccurred())
 			Ω(captions).Should(HaveLen(3))
-			Ω(captions[0]).Should(Equal(&srtconv.Caption{
+			Ω(captions[0]).Should(Equal(&srtfix.Caption{
 				ID:    1,
 				Start: 30 * time.Millisecond,
 				End:   4*time.Second + 380*time.Millisecond,
 				Text:  "hello 111",
 			}))
-			Ω(captions[1]).Should(Equal(&srtconv.Caption{
+			Ω(captions[1]).Should(Equal(&srtfix.Caption{
 				ID:    2,
 				Start: 1*time.Second + 890*time.Millisecond,
 				End:   7*time.Second + 200*time.Millisecond,
 				Text:  "hello 222",
 			}))
-			Ω(captions[2]).Should(Equal(&srtconv.Caption{
+			Ω(captions[2]).Should(Equal(&srtfix.Caption{
 				ID:    3,
 				Start: 4*time.Second + 380*time.Millisecond,
 				End:   10*time.Second + 170*time.Millisecond,
@@ -71,14 +71,14 @@ var _ = Describe("Parser", func() {
 	})
 	Describe("ParseCaption()", func() {
 		It("returns CaptionFormatErr for invalid caption", func() {
-			_, err := srtconv.ParseCaption("invalid caption")
+			_, err := srtfix.ParseCaption("invalid caption")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.CaptionFormatErr))
+			Ω(err).Should(MatchError(srtfix.CaptionFormatErr))
 		})
 		It("returns caption", func() {
-			caption, err := srtconv.ParseCaption(OneLiner)
+			caption, err := srtfix.ParseCaption(OneLiner)
 			Ω(err).ShouldNot(HaveOccurred())
-			Ω(caption).Should(Equal(&srtconv.Caption{
+			Ω(caption).Should(Equal(&srtfix.Caption{
 				ID:    1,
 				Start: 30 * time.Millisecond,
 				End:   4*time.Second + 380*time.Millisecond,
@@ -88,27 +88,27 @@ var _ = Describe("Parser", func() {
 	})
 	Describe("ParseTime()", func() {
 		It("returns TimeFormatErr for invalid time", func() {
-			_, err := srtconv.ParseTime("invalid time")
+			_, err := srtfix.ParseTime("invalid time")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.TimeFormatErr))
+			Ω(err).Should(MatchError(srtfix.TimeFormatErr))
 		})
 		It("returns TimeFormatErr for empty time", func() {
-			_, err := srtconv.ParseTime("")
+			_, err := srtfix.ParseTime("")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.TimeFormatErr))
+			Ω(err).Should(MatchError(srtfix.TimeFormatErr))
 		})
 		It("returns TimeFormatErr for invalid time 00:00,390", func() {
-			_, err := srtconv.ParseTime("00:00,390")
+			_, err := srtfix.ParseTime("00:00,390")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.TimeFormatErr))
+			Ω(err).Should(MatchError(srtfix.TimeFormatErr))
 		})
 		It("returns TimeFormatErr for invalid time 00:00:ab,090", func() {
-			_, err := srtconv.ParseTime("00:00:ab,090")
+			_, err := srtfix.ParseTime("00:00:ab,090")
 			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(srtconv.TimeFormatErr))
+			Ω(err).Should(MatchError(srtfix.TimeFormatErr))
 		})
 		It("returns duration for a valid time", func() {
-			duration, err := srtconv.ParseTime("00:00:04,380")
+			duration, err := srtfix.ParseTime("00:00:04,380")
 			Ω(err).ShouldNot(HaveOccurred())
 			Ω(duration).Should(Equal(time.Duration(time.Second*4 + time.Millisecond*380)))
 		})

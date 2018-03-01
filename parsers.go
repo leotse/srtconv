@@ -1,4 +1,4 @@
-package srtconv
+package srtfix
 
 import (
 	"errors"

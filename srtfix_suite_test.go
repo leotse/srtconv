@@ -1,4 +1,4 @@
-package srtconv_test
+package srtfix_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestSrtconv(t *testing.T) {
+func TestSrtfix(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Srtconv Suite")
+	RunSpecs(t, "Srtfix Suite")
 }
