@@ -15,6 +15,24 @@ const OneLiner = `
 hello world
 `
 
+const MultiLiner = `
+
+
+1
+00:00:00,030 --> 00:00:04,380
+hello 111
+
+2
+00:00:01,890 --> 00:00:07,200
+hello 222
+
+3
+00:00:04,380 --> 00:00:10,170
+hello 333
+
+
+`
+
 var _ = Describe("Parser", func() {
 	Describe("ParseSrtFile()", func() {
 		It("returns SrtFormatErr for invalid srt", func() {
@@ -27,13 +45,28 @@ var _ = Describe("Parser", func() {
 			Ω(err).ShouldNot(HaveOccurred())
 			Ω(captions).Should(HaveLen(0))
 		})
-		It("returns one line of caption for one-line srt ", func() {
-			captions, err := srtconv.ParseSrtFile(OneLiner)
+		It("returns parsed captions", func() {
+			captions, err := srtconv.ParseSrtFile(MultiLiner)
 			Ω(err).ShouldNot(HaveOccurred())
-			Ω(captions).Should(HaveLen(1))
-
-			caption := captions[0]
-			Ω(caption.ID).Should(Equal(1))
+			Ω(captions).Should(HaveLen(3))
+			Ω(captions[0]).Should(Equal(&srtconv.Caption{
+				ID:    1,
+				Start: 30 * time.Millisecond,
+				End:   4*time.Second + 380*time.Millisecond,
+				Text:  "hello 111",
+			}))
+			Ω(captions[1]).Should(Equal(&srtconv.Caption{
+				ID:    2,
+				Start: 1*time.Second + 890*time.Millisecond,
+				End:   7*time.Second + 200*time.Millisecond,
+				Text:  "hello 222",
+			}))
+			Ω(captions[2]).Should(Equal(&srtconv.Caption{
+				ID:    3,
+				Start: 4*time.Second + 380*time.Millisecond,
+				End:   10*time.Second + 170*time.Millisecond,
+				Text:  "hello 333",
+			}))
 		})
 	})
 	Describe("ParseCaption()", func() {
