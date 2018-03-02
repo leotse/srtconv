@@ -1,6 +1,9 @@
 package srtfix
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 // Caption is a piece of text that displays at the
 // specify time range in a video
@@ -11,10 +14,15 @@ type Caption struct {
 	Text  string
 }
 
-// Merge the given caption with me, keepin my current ID and Start time.
+// Merge the given caption's text with me, while keeping my
+// ID, Start time and End time
 func (c *Caption) Merge(with *Caption) {
-	c.End = with.End
 	c.Text = c.Text + "\n" + with.Text
+}
+
+// String is the *Caption Stringer
+func (c *Caption) String() string {
+	return fmt.Sprintf("%v %v %v %v\n", c.ID, c.Start, c.End, c.Text)
 }
 
 // copy the given caption and return a new instance

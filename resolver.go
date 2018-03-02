@@ -1,11 +1,11 @@
 package srtfix
 
 // Resolve overlapping timestamps by merging captions
-func Resolve(captions []*Caption) ([]*Caption, error) {
+func Resolve(captions []*Caption) []*Caption {
 
 	// empty captions?
 	if len(captions) == 0 {
-		return []*Caption{}, nil
+		return []*Caption{}
 	}
 
 	// iterate captions and merge overlapping ones
@@ -27,7 +27,6 @@ func Resolve(captions []*Caption) ([]*Caption, error) {
 		// overlapping captions! merge into one
 		if caption.Start < last.End {
 			last.Merge(caption)
-			id++
 			continue
 		}
 
@@ -38,5 +37,5 @@ func Resolve(captions []*Caption) ([]*Caption, error) {
 		id++
 	}
 
-	return res, nil
+	return res
 }

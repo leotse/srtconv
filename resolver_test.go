@@ -12,36 +12,47 @@ import (
 var _ = Describe("Fixer", func() {
 	Describe("Resolve()", func() {
 		It("returns empty captinos for nil input", func() {
-			resolved, err := Resolve(nil)
-			Ω(err).ShouldNot(HaveOccurred())
+			resolved := Resolve(nil)
 			Ω(resolved).Should(HaveLen(0))
 		})
 		It("returns empty captions for empty input", func() {
-			resolved, err := Resolve(Empty)
-			Ω(err).ShouldNot(HaveOccurred())
+			resolved := Resolve(Empty)
 			Ω(resolved).Should(HaveLen(0))
 		})
 		It("does not change a single caption", func() {
-			resolved, err := Resolve(OneCaption)
-			Ω(err).ShouldNot(HaveOccurred())
+			resolved := Resolve(OneCaption)
 			Ω(resolved).Should(HaveLen(1))
 			Ω(resolved).Should(Equal(OneCaption))
 		})
 		It("does not change valid captions", func() {
-			resolved, err := Resolve(NoOverlap)
-			Ω(err).ShouldNot(HaveOccurred())
+			resolved := Resolve(NoOverlap)
 			Ω(resolved).Should(HaveLen(2))
 			Ω(resolved).Should(Equal(NoOverlap))
 		})
 		It("merges 2 overlapping captions", func() {
-			resolved, err := Resolve(TwoOverlap)
-			Ω(err).ShouldNot(HaveOccurred())
+			resolved := Resolve(TwoOverlap)
 			Ω(resolved).Should(HaveLen(1))
 			Ω(resolved[0]).Should(Equal(&Caption{
 				ID:    1,
 				Start: TwoOverlap[0].Start,
-				End:   TwoOverlap[1].End,
+				End:   TwoOverlap[0].End,
 				Text:  TwoOverlap[0].Text + "\n" + TwoOverlap[1].Text,
+			}))
+		})
+		It("merges 3 overlapping captions", func() {
+			resolved := Resolve(ThreeOverlap)
+			Ω(resolved).Should(HaveLen(2))
+			Ω(resolved[0]).Should(Equal(&Caption{
+				ID:    1,
+				Start: ThreeOverlap[0].Start,
+				End:   ThreeOverlap[0].End,
+				Text:  ThreeOverlap[0].Text + "\n" + ThreeOverlap[1].Text,
+			}))
+			Ω(resolved[1]).Should(Equal(&Caption{
+				ID:    2,
+				Start: ThreeOverlap[2].Start,
+				End:   ThreeOverlap[2].End,
+				Text:  ThreeOverlap[2].Text,
 			}))
 		})
 	})
@@ -86,5 +97,25 @@ var TwoOverlap = []*Caption{
 		Start: 2 * time.Second,
 		End:   4 * time.Second,
 		Text:  "hello 2",
+	},
+}
+var ThreeOverlap = []*Caption{
+	&Caption{
+		ID:    1,
+		Start: 30 * time.Millisecond,
+		End:   4*time.Second + 380*time.Millisecond,
+		Text:  "hello 1",
+	},
+	&Caption{
+		ID:    2,
+		Start: 1*time.Second + 890*time.Millisecond,
+		End:   7*time.Second + 200*time.Millisecond,
+		Text:  "hello 2",
+	},
+	&Caption{
+		ID:    3,
+		Start: 4*time.Second + 380*time.Millisecond,
+		End:   10*time.Second + 170*time.Millisecond,
+		Text:  "hello 3",
 	},
 }
