@@ -34,6 +34,7 @@ func Resolve(captions []*Caption) []*Caption {
 		addme := copy(caption)
 		addme.ID = id
 		res = append(res, addme)
+		last = addme
 		id++
 	}
 
