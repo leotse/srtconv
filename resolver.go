@@ -15,26 +15,16 @@ func Resolve(captions []*Caption) []*Caption {
 	res := make([]*Caption, 0)
 	for _, caption := range captions {
 
-		// first caption - just update state and continue
-		if last == nil {
-			last = copy(caption)
-			last.ID = id
-			res = append(res, last)
-			id++
-			continue
-		}
-
-		// overlapping captions! merge into one
-		if caption.Start < last.End {
+		// overlapping captions! merge into last
+		if last != nil && caption.Start < last.End {
 			last.Merge(caption)
 			continue
 		}
 
-		// no overlapping, add to resulting caption
-		addme := copy(caption)
-		addme.ID = id
-		res = append(res, addme)
-		last = addme
+		// otherwise.. just add the caption to results + update last pointer
+		last = copy(caption)
+		last.ID = id
+		res = append(res, last)
 		id++
 	}
 
