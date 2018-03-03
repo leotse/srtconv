@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -25,9 +26,11 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-	log.Println(parsed)
 
 	// resolve time overlap
 	resolved := srtfix.Resolve(parsed)
-	log.Println(resolved)
+	for _, caption := range resolved {
+		fmt.Println(caption)
+		fmt.Println()
+	}
 }

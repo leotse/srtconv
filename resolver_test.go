@@ -66,56 +66,56 @@ var Empty = []*Caption{}
 var OneCaption = []*Caption{
 	&Caption{
 		ID:    1,
-		Start: 50 * time.Millisecond,
-		End:   3 * time.Second,
+		Start: Time(50 * time.Millisecond),
+		End:   Time(3 * time.Second),
 		Text:  "hello",
 	},
 }
 var NoOverlap = []*Caption{
 	&Caption{
 		ID:    1,
-		Start: 10 * time.Millisecond,
-		End:   2 * time.Second,
+		Start: Time(10 * time.Millisecond),
+		End:   Time(2 * time.Second),
 		Text:  "abc",
 	},
 	&Caption{
 		ID:    2,
-		Start: 2 * time.Second,
-		End:   3 * time.Second,
+		Start: Time(2 * time.Second),
+		End:   Time(3 * time.Second),
 		Text:  "def",
 	},
 }
 var TwoOverlap = []*Caption{
 	&Caption{
 		ID:    2,
-		Start: 50 * time.Millisecond,
-		End:   3 * time.Second,
+		Start: Time(50 * time.Millisecond),
+		End:   Time(3 * time.Second),
 		Text:  "hello 1",
 	},
 	&Caption{
 		ID:    3,
-		Start: 2 * time.Second,
-		End:   4 * time.Second,
+		Start: Time(2 * time.Second),
+		End:   Time(4 * time.Second),
 		Text:  "hello 2",
 	},
 }
 var ThreeOverlap = []*Caption{
 	&Caption{
 		ID:    1,
-		Start: 30 * time.Millisecond,
-		End:   4*time.Second + 380*time.Millisecond,
+		Start: Time(30 * time.Millisecond),
+		End:   Time(4*time.Second + 380*time.Millisecond),
 		Text:  "hello 1",
 	},
 	&Caption{
 		ID:    2,
-		Start: 1*time.Second + 890*time.Millisecond,
-		End:   7*time.Second + 200*time.Millisecond,
+		Start: Time(1*time.Second + 890*time.Millisecond),
+		End:   Time(7*time.Second + 200*time.Millisecond),
 		Text:  "hello 2",
 	},
 	&Caption{
 		ID:    3,
-		Start: 4*time.Second + 380*time.Millisecond,
-		End:   10*time.Second + 170*time.Millisecond,
+		Start: Time(4*time.Second + 380*time.Millisecond),
+		End:   Time(10*time.Second + 170*time.Millisecond),
 		Text:  "hello 3",
 	},
 }

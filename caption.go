@@ -2,16 +2,25 @@ package srtfix
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"time"
 )
+
+// Time handles the serializing of srt time format
+type Time time.Duration
 
 // Caption is a piece of text that displays at the
 // specify time range in a video
 type Caption struct {
 	ID    int
-	Start time.Duration
-	End   time.Duration
+	Start Time
+	End   Time
 	Text  string
+
+	// the following fields are only to improve perf
+	StartText string
+	EndText   string
 }
 
 // Merge the given caption's text with me, while keeping my
@@ -22,15 +31,22 @@ func (c *Caption) Merge(with *Caption) {
 
 // String is the *Caption Stringer
 func (c *Caption) String() string {
-	return fmt.Sprintf("%v %v %v %v\n", c.ID, c.Start, c.End, c.Text)
+	parts := []string{
+		strconv.Itoa(c.ID),
+		fmt.Sprintf("%v --> %v", c.StartText, c.EndText),
+		c.Text,
+	}
+	return strings.Join(parts, "\n")
 }
 
 // copy the given caption and return a new instance
 func copy(c *Caption) *Caption {
 	return &Caption{
-		ID:    c.ID,
-		Start: c.Start,
-		End:   c.End,
-		Text:  c.Text,
+		ID:        c.ID,
+		Start:     c.Start,
+		End:       c.End,
+		Text:      c.Text,
+		StartText: c.StartText,
+		EndText:   c.EndText,
 	}
 }

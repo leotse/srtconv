@@ -13,3 +13,6 @@
 
 # Test coverage profile
 *.coverprofile
+
+# Build output
+dist

@@ -51,16 +51,21 @@ func ParseCaption(c string) (*Caption, error) {
 
 	// 2nd line is the time
 	timeParts := strings.Split(parts[1], " ")
+	startText := timeParts[0]
+	endText := timeParts[len(timeParts)-1]
 
-	caption.Start, err = ParseTime(timeParts[0])
+	caption.Start, err = ParseTime(startText)
 	if err != nil {
 		return nil, errors.New(CaptionFormatErr)
 	}
 
-	caption.End, err = ParseTime(timeParts[len(timeParts)-1])
+	caption.End, err = ParseTime(endText)
 	if err != nil {
 		return nil, errors.New(CaptionFormatErr)
 	}
+
+	caption.StartText = startText
+	caption.EndText = endText
 
 	// 3rd line is the text
 	caption.Text = strings.Trim(parts[2], " ")
@@ -68,29 +73,29 @@ func ParseCaption(c string) (*Caption, error) {
 	return &caption, nil
 }
 
-// ParseTime parses a srt time into a Duration
+// ParseTime parses a srt time into a Time
 // Expects input to be in the format: `00:00:04,380`
-func ParseTime(t string) (time.Duration, error) {
+func ParseTime(t string) (Time, error) {
 
 	// split the time into 4 parts
 	parts := strings.FieldsFunc(t, timeDelimiters)
 	if len(parts) != 4 {
-		return time.Duration(0), errors.New(TimeFormatErr)
+		return Time(0), errors.New(TimeFormatErr)
 	}
 
 	// convert parts into duration
 	// each part should be a valid number
 	partDurations := []time.Duration{time.Hour, time.Minute, time.Second, time.Millisecond}
-	total := time.Duration(0)
+	total := Time(0)
 	for i, part := range parts {
 		numPart, err := strconv.Atoi(part)
 		if err != nil {
-			return time.Duration(0), errors.New(TimeFormatErr)
+			return Time(0), errors.New(TimeFormatErr)
 		}
-		total = total + partDurations[i]*time.Duration(numPart)
+		total = total + Time(partDurations[i])*Time(numPart)
 	}
 
-	return time.Duration(total), nil
+	return Time(total), nil
 }
 
 func timeDelimiters(c rune) bool {
