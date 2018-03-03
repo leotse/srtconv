@@ -11,6 +11,11 @@ import (
 
 func main() {
 
+	if len(os.Args) < 2 {
+		usage()
+		os.Exit(0)
+	}
+
 	// file to read from arg
 	filepath := os.Args[1]
 
@@ -33,4 +38,10 @@ func main() {
 		fmt.Println(caption)
 		fmt.Println()
 	}
+}
+
+func usage() {
+	fmt.Println()
+	fmt.Println("\tUsage: srtfix [input_srt_path]")
+	fmt.Println()
 }
