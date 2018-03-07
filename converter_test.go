@@ -47,11 +47,13 @@ var _ = Describe("Converter", func() {
 const SrtContent = `1
 00:00:00,030 --> 00:00:04,380
 hello world
+
 `
 
 const SrtResult = `1
 00:00:00,030 --> 00:00:04,380
 hello world
+
 `
 
 var ParsedCaptions = []*Caption{

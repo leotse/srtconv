@@ -66,7 +66,7 @@ func (c *FileConverter) Convert() error {
 	var buffer bytes.Buffer
 	for _, caption := range resolved {
 		buffer.WriteString(caption.String())
-		buffer.WriteRune('\n')
+		buffer.WriteString("\n\n")
 	}
 
 	// and finally write to file!

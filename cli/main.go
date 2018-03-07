@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -19,24 +18,17 @@ func main() {
 	// file to read from arg
 	filepath := os.Args[1]
 
-	// read file
-	file, err := ioutil.ReadFile(filepath)
+	// init converter
+	converter := srtfix.NewFileConverter(
+		NewFileReader(filepath),
+		NewFileWriter(filepath+".out"),
+		NewParser(),
+		NewResolver(),
+	)
+
+	err := converter.Convert()
 	if err != nil {
 		log.Panic(err)
-	}
-
-	// parse file
-	content := string(file)
-	parsed, err := srtfix.ParseSrtFile(content)
-	if err != nil {
-		log.Panic(err)
-	}
-
-	// resolve time overlap
-	resolved := srtfix.Resolve(parsed)
-	for _, caption := range resolved {
-		fmt.Println(caption)
-		fmt.Println()
 	}
 }
 
