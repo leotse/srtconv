@@ -9,7 +9,7 @@ import (
 	. "github.com/leotse/srtfix"
 )
 
-var _ = Describe("Fixer", func() {
+var _ = Describe("Resolver", func() {
 	Describe("Resolve()", func() {
 		It("returns empty captinos for nil input", func() {
 			resolved := Resolve(nil)
