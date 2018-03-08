@@ -50,6 +50,19 @@ var _ = Describe("Parser", func() {
 				EndText:   "00:00:10,170",
 			}))
 		})
+		It("Sets caption #1 start time to 1ms if the original start time is 0", func() {
+			captions, err := ParseSrtFile(OneLinerStartAt0)
+			Ω(err).ShouldNot(HaveOccurred())
+			Ω(captions).Should(HaveLen(1))
+			Ω(captions[0]).Should(Equal(&Caption{
+				ID:        1,
+				Start:     Time(1 * time.Millisecond),
+				End:       Time(12*time.Second + 880*time.Millisecond),
+				Text:      "hello world 000",
+				StartText: "00:00:00,001",
+				EndText:   "00:00:12,880",
+			}))
+		})
 	})
 	Describe("ParseCaption()", func() {
 		It("returns CaptionFormatErr for invalid caption", func() {
@@ -102,6 +115,12 @@ var _ = Describe("Parser", func() {
 ///////////////
 // Test Data //
 ///////////////
+
+const OneLinerStartAt0 = `
+1
+00:00:00,000 --> 00:00:12,880
+hello world 000
+`
 
 const OneLiner = `
 1

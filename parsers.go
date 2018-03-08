@@ -26,6 +26,12 @@ func ParseSrtFile(content string) ([]*Caption, error) {
 		if err != nil {
 			return nil, errors.New(SrtFormatErr)
 		}
+
+		// special request - first caption should start at 1ms
+		if i == 0 && captions[i].Start == Time(0) {
+			captions[i].Start = Time(1 * time.Millisecond)
+			captions[i].StartText = "00:00:00,001"
+		}
 	}
 
 	return captions, nil
