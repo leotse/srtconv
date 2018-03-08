@@ -1,12 +1,18 @@
 package main
 
 import (
-	"github.com/leotse/srtfix"
+	"fmt"
 	"io/ioutil"
+
+	"github.com/leotse/srtfix"
 )
 
 func NewFileReader(path string) *FileReader {
 	return &FileReader{path: path}
+}
+
+func NewStdoutWriter() *StdoutWriter {
+	return &StdoutWriter{}
 }
 
 func NewFileWriter(path string) *FileWriter {
@@ -28,6 +34,14 @@ type FileReader struct {
 func (reader *FileReader) Read() (string, error) {
 	content, err := ioutil.ReadFile(reader.path)
 	return string(content), err
+}
+
+type StdoutWriter struct {
+}
+
+func (writer *StdoutWriter) Write(content string) error {
+	fmt.Println(content)
+	return nil
 }
 
 type FileWriter struct {

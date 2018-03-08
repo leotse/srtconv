@@ -16,3 +16,7 @@
 
 # Build output
 dist
+out
+
+# macOS
+.DS_Store
