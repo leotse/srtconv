@@ -6,4 +6,4 @@ CLI to fix invalid srt files with overlapping timestamps.
 
     (1) srtfix [input_srt_path]
 
-    (2) srtfix input_dir] [output_dir]
+    (2) srtfix [input_dir] [output_dir]
