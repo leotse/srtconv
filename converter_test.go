@@ -1,11 +1,12 @@
 package srtfix_test
 
 import (
+	"errors"
 	"github.com/golang/mock/gomock"
 	"time"
 
 	. "github.com/onsi/ginkgo"
-	// . "github.com/onsi/gomega"
+	. "github.com/onsi/gomega"
 
 	. "github.com/leotse/srtfix"
 	. "github.com/leotse/srtfix/mocks"
@@ -40,6 +41,17 @@ var _ = Describe("Converter", func() {
 			resolver.EXPECT().Resolve(ParsedCaptions).Return(ParsedCaptions).Times(1)
 			writer.EXPECT().Write(SrtResult).Times(1)
 			converter.Convert()
+		})
+		It("returns error if read file failed", func() {
+			reader.EXPECT().Read().Return("", errors.New("uh oh read failed"))
+			err := converter.Convert()
+			Ω(err).Should(HaveOccurred())
+		})
+		It("returns error if captions parse failed", func() {
+			reader.EXPECT().Read().Return(SrtContent, nil)
+			parser.EXPECT().Parse(SrtContent).Return(nil, errors.New("uh oh parse failed"))
+			err := converter.Convert()
+			Ω(err).Should(HaveOccurred())
 		})
 	})
 })

@@ -65,11 +65,6 @@ var _ = Describe("Parser", func() {
 		})
 	})
 	Describe("ParseCaption()", func() {
-		It("returns CaptionFormatErr for invalid caption", func() {
-			_, err := ParseCaption("invalid caption")
-			Ω(err).Should(HaveOccurred())
-			Ω(err).Should(MatchError(CaptionFormatErr))
-		})
 		It("returns caption", func() {
 			caption, err := ParseCaption(OneLiner)
 			Ω(err).ShouldNot(HaveOccurred())
@@ -81,6 +76,26 @@ var _ = Describe("Parser", func() {
 				StartText: "00:00:00,030",
 				EndText:   "00:00:04,380",
 			}))
+		})
+		It("returns CaptionFormatErr for invalid caption", func() {
+			_, err := ParseCaption("invalid caption")
+			Ω(err).Should(HaveOccurred())
+			Ω(err).Should(MatchError(CaptionFormatErr))
+		})
+		It("returns error if caption ID is invalid", func() {
+			_, err := ParseCaption(OneLineInvalidID)
+			Ω(err).Should(HaveOccurred())
+			Ω(err).Should(MatchError(CaptionFormatErr))
+		})
+		It("returns error if start time is invalid", func() {
+			_, err := ParseCaption(OneLineInvalidStartTime)
+			Ω(err).Should(HaveOccurred())
+			Ω(err).Should(MatchError(CaptionFormatErr))
+		})
+		It("returns error if end time is invalid", func() {
+			_, err := ParseCaption(OneLineInvalidEndTime)
+			Ω(err).Should(HaveOccurred())
+			Ω(err).Should(MatchError(CaptionFormatErr))
 		})
 	})
 	Describe("ParseTime()", func() {
@@ -115,6 +130,24 @@ var _ = Describe("Parser", func() {
 ///////////////
 // Test Data //
 ///////////////
+
+const OneLineInvalidID = `
+abc
+00:00:00,000 --> 00:00:12,880
+hello world 000
+`
+
+const OneLineInvalidStartTime = `
+1
+00:00:ab,000 --> 00:00:12,880
+hello world 847
+`
+
+const OneLineInvalidEndTime = `
+1
+00:00:00,020 --> 00:ab:12,880
+hello world 098
+`
 
 const OneLinerStartAt0 = `
 1
